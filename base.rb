@@ -1,54 +1,25 @@
 require 'octokit'
+require 'netrc'
 
 class Base
-  attr_accessor :un, :pw
+  # attr_accessor :un, :pw
 
   # un = username
   # pw = password
 
   def initialize
-    @client = Octokit::Client.new(:access_token => '0fbd1b3377212d79931c0c294300c2a48584d08f')
+    @client = Octokit::Client.new(:access_token =>
+    '0fbd1b3377212d79931c0c294300c2a48584d08f')
 
-    @user = @client.user
-    @user.login
+    print "Username you want to search?\t"
+    @username = gets.chomp.to_s
 
-    puts @user[:company]
-    puts @user[:name]
-    puts @user[:email]
+    @user = @client.user(@username)
 
-=begin
-    @user.length do |organization|
-      puts organization[:name]
-    end
-=end
-
-  end
-
-  def rubyDevs(un)
-    print "Looking for a ruby dev? "
-
-    answer = gets.chomp.to_s
-    if (answer == "n" or answer == "N" || answer == "no")
-      # system.exit
-    elsif
-      # Octokit::Client.user '#{un}'
-      puts 'error error'
-    end
-  end
-
-  def jsDevs(un)
-
-  end
-
-  def pyDevs(un)
-
-  end
-
-  def caps!
-    @un.capitlize!
+    puts "#{@username} email is:\t\t#{@user.email}"
   end
 end
 
 
 
-kiratsuchi = Base.new
+start = Base.new
