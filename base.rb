@@ -17,9 +17,9 @@ class Base
     @user = @client.user(@username)
 
     puts "#{@username} email is:\t\t#{@user.email}"
+    puts @user.repository('converse', :options => name)
   end
 end
-
 
 
 start = Base.new
