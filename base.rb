@@ -30,8 +30,9 @@ class Base
 
    @client.languages('UbbyTech/flexxy').each do |sum|
      puts sum
-
    end
+
+   @client.commits_since('kiratsuchi/viewMe', '2017-05-01')
 
   end
 end
