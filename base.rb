@@ -8,13 +8,14 @@ class Base
   # pw = password
 
   def initialize
-    @client = Octokit::Client.new(:access_token =>
-    '0fbd1b3377212d79931c0c294300c2a48584d08f')
+    @client = Octokit::Client.new(:netrc => true)
     @count = 1
 
     print "Username you want to search?\t"
     @username = ARGV[0] || gets.chomp.to_s
     @user = @client.user(@username)
+
+
     puts "#{@username} email is:\t\t#{@user.email}"
 
 
@@ -27,13 +28,6 @@ class Base
     @client.repositories(@username).each do |r|
       puts r[:description]
     end
-
-   @client.languages('UbbyTech/flexxy').each do |sum|
-     puts sum
-   end
-
-   @client.commits_since('kiratsuchi/viewMe', '2017-05-01')
-
   end
 end
 
