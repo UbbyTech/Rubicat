@@ -29,7 +29,14 @@ class Base
       puts r[:description]
     end
   end
+
+  def orgName
+    @client.organization('ubbytech').each do |n|
+      puts n[:name]
+    end
+  end
 end
 
 
 start = Base.new
+puts start.orgName
