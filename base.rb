@@ -1,5 +1,4 @@
 require 'octokit'
-require 'netrc'
 
 class Base
   # attr_accessor :un, :pw
@@ -8,7 +7,7 @@ class Base
   # pw = password
 
   def initialize
-    @client = Octokit::Client.new(:netrc => true)
+    @cliewnt = Octokit::Client.new(:access_token => '3ef7914169f90ed5f12852f6274f7b305615f77b')
     @count = 1
 
     print "Username you want to search?\t"
@@ -31,12 +30,9 @@ class Base
   end
 
   def orgName
-    @client.organization('ubbytech').each do |n|
-      puts n[:name]
-    end
+    @client.organization('UbbyTech')
   end
 end
 
 
 start = Base.new
-puts start.orgName
