@@ -7,7 +7,7 @@ class Base
   # pw = password
 
   def initialize
-    @cliewnt = Octokit::Client.new(:access_token => '3ef7914169f90ed5f12852f6274f7b305615f77b')
+    @client = Octokit::Client.new(:access_token => '3ef7914169f90ed5f12852f6274f7b305615f77b')
     @count = 1
 
     print "Username you want to search?\t"
@@ -27,12 +27,28 @@ class Base
     @client.repositories(@username).each do |r|
       puts r[:description]
     end
+
+    @client.organization_repositories('ubbytech')
+
   end
 
-  def orgName
-    @client.organization('UbbyTech')
+
+  def memberVal  # validates users organization membership
+    print "What organization do you belong to:\t"
+    @yourOrg = gets.chomp.to_s
+
+    if (@client.organization_member?(@yourOrg, @username) == true)
+      puts "Your are a member of this organization"
+    else
+      puts "Sorry you do not belong to this membership"
+    end
+  end
+
+  def findRubyRepos # find all ruby repositories
+    @client.search_repositories('ruby')
   end
 end
 
 
 start = Base.new
+start.findRubyRepos
