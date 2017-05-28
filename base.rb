@@ -47,6 +47,17 @@ class Base
   def findRubyRepos # find all ruby repositories
     @client.search_repositories('ruby')
   end
+
+  def collabs # viewing all collaborators for specific repo
+    print "Do you wish wish to view all collaborators for this repository?\t"
+    @answer = gets.chomp.to_s
+
+    if(@answer == "y")
+      puts @client.collaborators(@repoName)
+    elsif(@answer == "n")
+      exit
+    end
+  end
 end
 
 
