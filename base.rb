@@ -7,7 +7,7 @@ class Base
   # pw = password
 
   def initialize
-    @client = Octokit::Client.new(:access_token => '3ef7914169f90ed5f12852f6274f7b305615f77b')
+    @client = Octokit::Client.new(:access_token => '<access_token_here>') # replace your access token
     @count = 1
 
     print "What's the username you want to search?\t"
