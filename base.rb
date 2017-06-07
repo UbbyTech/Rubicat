@@ -10,7 +10,7 @@ class Base
     @client = Octokit::Client.new(:access_token => '3ef7914169f90ed5f12852f6274f7b305615f77b')
     @count = 1
 
-    print "Username you want to search?\t"
+    print "What's the username you want to search?\t"
     @username = ARGV[0] || gets.chomp.to_s
     @user = @client.user(@username)
 
@@ -19,16 +19,12 @@ class Base
 
 
     @client.repos(@username).each do |f|
-      puts "repo # #{@count}: #{f[:name]}"
+      puts "repo # #{@count}: #{f[:name]}\nDescription: #{f[:description]}\n\n"
+
       @count += 1
     end
 
 
-    @client.repositories(@username).each do |r|
-      puts r[:description]
-    end
-
-    @client.organization_repositories('ubbytech')
 
   end
 
@@ -44,11 +40,10 @@ class Base
     end
   end
 
-  def findRubyRepos # find all ruby repositories
-    @client.search_repositories('ruby')
-  end
+  def viewCollabs # viewing all collaborators for specific repo
+    print "choose a repo to view collaborators (note: must be public repo)\t"
+    @repoName = gets.chomp.to_s
 
-  def collabs # viewing all collaborators for specific repo
     print "Do you wish wish to view all collaborators for this repository?\t"
     @answer = gets.chomp.to_s
 
@@ -58,8 +53,10 @@ class Base
       exit
     end
   end
+
+
+
 end
 
 
 start = Base.new
-start.findRubyRepos
